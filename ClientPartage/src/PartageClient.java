@@ -2,16 +2,18 @@
 
 import java.rmi.Naming;
 
-public class PartageServeur {
+public class PartageClient {
 	
 	public static void main(String[] args) {
+		
 		try {
+			PartageInterface partage = (PartageInterface) Naming.lookup("PartageApplication");
 			
-			PartageInterface p = new PartageImplementation();
-			Naming.rebind("PartageApplication", p);
+			new MenuIHM(partage);
 			
-			// TEST
-		} 
+			
+		}
+		
 		catch(Exception e) {
 			System.out.println("Erreur : "+e);
 		}

@@ -33,10 +33,8 @@ public class PartageImplementation extends UnicastRemoteObject implements Partag
 			}
 			// il est deja emprunté
 			else {
-				
-				p.ajouterEnListeAttente(u);
-				
 				return false;
+				//p.ajouterEnListeAttente(u);
 			}
 		
 	}
@@ -60,7 +58,7 @@ public class PartageImplementation extends UnicastRemoteObject implements Partag
 	}
 	
 	@Override
-	public boolean ajouterProduit(String def, int note, String commentaire) throws RemoteException {
+	public boolean ajouterProduit(String def) throws RemoteException {
 		
 		int v=0;
 		for(ProduitInterface pt : produits) {
@@ -69,7 +67,7 @@ public class PartageImplementation extends UnicastRemoteObject implements Partag
 			}
 		}
 		if(v==0) {
-			Produit p = new Produit(def,note,commentaire);
+			ProduitInterface p = new Produit(def);
 			produits.add(p);
 			return true;
 		}
@@ -108,8 +106,7 @@ public class PartageImplementation extends UnicastRemoteObject implements Partag
 
 	@Override
 	public List<ProduitInterface> getProduits() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return produits;
 	}
 	
 	

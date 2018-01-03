@@ -36,16 +36,6 @@ public class Produit extends UnicastRemoteObject implements ProduitInterface {
 		
 	}
 	
-	public Produit(String t, int n, String c) throws RemoteException{
-		super();
-		this.definitionType=t;
-		this.disponibilite=true;
-		this.listeNotes=new ArrayList<>();
-		this.listeCommentaires=new ArrayList<>();
-		this.ajouterUneNote(n);
-		this.ajouterUnCommentaire(c);
-	}
-	
 	public void ajouterEnListeAttente(UtilisateurInterface u) throws RemoteException {
 		this.listeAttente.add(u);
 	}
@@ -61,7 +51,7 @@ public class Produit extends UnicastRemoteObject implements ProduitInterface {
 	public UtilisateurInterface getUtilisateurEmprunt() throws RemoteException {
 		return utilisateurEmprunt;
 	}
-	public void setUtilisateurEmprunt(UtilisateurInterface u) {
+	public void setUtilisateurEmprunt(UtilisateurInterface u) throws RemoteException {
 		this.utilisateurEmprunt=u;
 	}
 	
