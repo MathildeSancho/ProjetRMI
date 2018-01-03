@@ -3,6 +3,7 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 // Classe pour definir les produits qui vont être empruntés
@@ -27,13 +28,32 @@ public class Produit extends UnicastRemoteObject implements ProduitInterface {
 	// Liste d'attente si le produit est deja emprunté
 	private List<UtilisateurInterface> listeAttente;
 	
+	private Date dateCrea;
+	//Emprunté au moins 1 fois
+	private boolean emprunte;
+	
 	public Produit(String t) throws RemoteException{
 		super();
+		
+		this.emprunte=false;
 		this.definitionType=t;
 		this.disponibilite=true;
 		this.listeNotes=new ArrayList<>();
 		this.listeCommentaires=new ArrayList<>();
+		this.dateCrea=new Date(System.currentTimeMillis());
 		
+	}
+	
+	public Date getDateCreation() {
+		return dateCrea;
+	}
+	
+	public boolean getEmprunte() throws RemoteException{
+		return emprunte;
+	}
+	
+	public void setEmprunte() throws RemoteException{
+		this.emprunte=true;
 	}
 	
 	public void ajouterEnListeAttente(UtilisateurInterface u) throws RemoteException {

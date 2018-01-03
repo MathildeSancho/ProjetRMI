@@ -26,6 +26,7 @@ public class PartageImplementation extends UnicastRemoteObject implements Partag
 				
 				p.setUtilisateurEmprunt(u);
 				p.setDisponibilite(false);
+				p.setEmprunte();
 				
 				u.ajouterEmprunt(p);
 				

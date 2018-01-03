@@ -26,7 +26,7 @@ public class RetournerProduitIHM  extends JFrame {
 	private PartageInterface partage;
 	
 	public RetournerProduitIHM (PartageInterface partage) {
-		super("Ajouter un nouveau produit");
+		super("Retourner un produit");
 		
 		this.partage=partage;
 		
