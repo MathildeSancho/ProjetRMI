@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://upesellservice.rmi.upem" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://upesellservice.rmi.upem" xmlns:intf="http://upesellservice.rmi.upem" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://upesellservice.rmi.upem" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <element name="setProductsToSell">
+    <complexType>
+     <sequence>
+      <element name="productsToSell" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_xsd_anyType">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+   <element name="setProductsToSellResponse">
+    <complexType/>
+   </element>
+   <element name="affichePrixProduits">
+    <complexType>
+     <sequence>
+      <element name="lp" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="affichePrixProduitsResponse">
+    <complexType>
+     <sequence>
+      <element name="affichePrixProduitsReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterAuPanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="impl:Produit"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Utilisateur">
+    <sequence>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="prenom" nillable="true" type="xsd:string"/>
+     <element name="pseudo" nillable="true" type="xsd:string"/>
+     <element name="type" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="Produit">
+    <sequence>
+     <element name="commentaires" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+     <element name="dateCrea" nillable="true" type="xsd:dateTime"/>
+     <element name="dejaEmprunter" nillable="true" type="xsd:boolean"/>
+     <element name="disponibilite" type="xsd:boolean"/>
+     <element name="listeAttente" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="notes" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+     <element name="prix" type="xsd:double"/>
+     <element name="utilisateurEmprunt" nillable="true" type="impl:Utilisateur"/>
+    </sequence>
+   </complexType>
+   <element name="ajouterAuPanierResponse">
+    <complexType/>
+   </element>
+   <element name="getProductsToSell">
+    <complexType/>
+   </element>
+   <element name="getProductsToSellResponse">
+    <complexType>
+     <sequence>
+      <element name="getProductsToSellReturn" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPanier">
+    <complexType>
+     <sequence>
+      <element name="panier" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setPanierResponse">
+    <complexType/>
+   </element>
+   <element name="plusDeDeuxMois">
+    <complexType>
+     <sequence>
+      <element name="p" type="impl:Produit"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="plusDeDeuxMoisResponse">
+    <complexType>
+     <sequence>
+      <element name="plusDeDeuxMoisReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPanier">
+    <complexType/>
+   </element>
+   <element name="getPanierResponse">
+    <complexType>
+     <sequence>
+      <element name="getPanierReturn" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="viderPanier">
+    <complexType/>
+   </element>
+   <element name="viderPanierResponse">
+    <complexType/>
+   </element>
+   <element name="modifierPanier">
+    <complexType>
+     <sequence>
+      <element name="p" type="impl:Produit"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="modifierPanierResponse">
+    <complexType/>
+   </element>
+   <element name="estDisponible">
+    <complexType>
+     <sequence>
+      <element name="p" type="impl:Produit"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="estDisponibleResponse">
+    <complexType>
+     <sequence>
+      <element name="estDisponibleReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="initialisationListProduits">
+    <complexType>
+     <sequence>
+      <element name="produits" type="impl:ArrayOf_xsd_anyType"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="initialisationListProduitsResponse">
+    <complexType/>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://upesellservice.rmi.upem"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="affichePrixProduitsResponse">
+
+      <wsdl:part element="impl:affichePrixProduitsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPanierResponse">
+
+      <wsdl:part element="impl:getPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="affichePrixProduitsRequest">
+
+      <wsdl:part element="impl:affichePrixProduits" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPanierRequest">
+
+      <wsdl:part element="impl:setPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setPanierResponse">
+
+      <wsdl:part element="impl:setPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPanierRequest">
+
+      <wsdl:part element="impl:getPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setProductsToSellResponse">
+
+      <wsdl:part element="impl:setProductsToSellResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="plusDeDeuxMoisRequest">
+
+      <wsdl:part element="impl:plusDeDeuxMois" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderPanierRequest">
+
+      <wsdl:part element="impl:viderPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modifierPanierResponse">
+
+      <wsdl:part element="impl:modifierPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterAuPanierRequest">
+
+      <wsdl:part element="impl:ajouterAuPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="initialisationListProduitsRequest">
+
+      <wsdl:part element="impl:initialisationListProduits" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductsToSellResponse">
+
+      <wsdl:part element="impl:getProductsToSellResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="initialisationListProduitsResponse">
+
+      <wsdl:part element="impl:initialisationListProduitsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderPanierResponse">
+
+      <wsdl:part element="impl:viderPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="plusDeDeuxMoisResponse">
+
+      <wsdl:part element="impl:plusDeDeuxMoisResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getProductsToSellRequest">
+
+      <wsdl:part element="impl:getProductsToSell" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="estDisponibleRequest">
+
+      <wsdl:part element="impl:estDisponible" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="modifierPanierRequest">
+
+      <wsdl:part element="impl:modifierPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="estDisponibleResponse">
+
+      <wsdl:part element="impl:estDisponibleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterAuPanierResponse">
+
+      <wsdl:part element="impl:ajouterAuPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setProductsToSellRequest">
+
+      <wsdl:part element="impl:setProductsToSell" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UPESellService">
+
+      <wsdl:operation name="setProductsToSell">
+
+         <wsdl:input message="impl:setProductsToSellRequest" name="setProductsToSellRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setProductsToSellResponse" name="setProductsToSellResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="affichePrixProduits">
+
+         <wsdl:input message="impl:affichePrixProduitsRequest" name="affichePrixProduitsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:affichePrixProduitsResponse" name="affichePrixProduitsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterAuPanier">
+
+         <wsdl:input message="impl:ajouterAuPanierRequest" name="ajouterAuPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajouterAuPanierResponse" name="ajouterAuPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductsToSell">
+
+         <wsdl:input message="impl:getProductsToSellRequest" name="getProductsToSellRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getProductsToSellResponse" name="getProductsToSellResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPanier">
+
+         <wsdl:input message="impl:setPanierRequest" name="setPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setPanierResponse" name="setPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="plusDeDeuxMois">
+
+         <wsdl:input message="impl:plusDeDeuxMoisRequest" name="plusDeDeuxMoisRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:plusDeDeuxMoisResponse" name="plusDeDeuxMoisResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPanier">
+
+         <wsdl:input message="impl:getPanierRequest" name="getPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPanierResponse" name="getPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viderPanier">
+
+         <wsdl:input message="impl:viderPanierRequest" name="viderPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:viderPanierResponse" name="viderPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modifierPanier">
+
+         <wsdl:input message="impl:modifierPanierRequest" name="modifierPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:modifierPanierResponse" name="modifierPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="estDisponible">
+
+         <wsdl:input message="impl:estDisponibleRequest" name="estDisponibleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:estDisponibleResponse" name="estDisponibleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="initialisationListProduits">
+
+         <wsdl:input message="impl:initialisationListProduitsRequest" name="initialisationListProduitsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:initialisationListProduitsResponse" name="initialisationListProduitsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="UPESellServiceSoapBinding" type="impl:UPESellService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="setProductsToSell">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setProductsToSellRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setProductsToSellResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="affichePrixProduits">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="affichePrixProduitsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="affichePrixProduitsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterAuPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajouterAuPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajouterAuPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getProductsToSell">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getProductsToSellRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getProductsToSellResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="plusDeDeuxMois">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="plusDeDeuxMoisRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="plusDeDeuxMoisResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="viderPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viderPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viderPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modifierPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modifierPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modifierPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="estDisponible">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="estDisponibleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="estDisponibleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="initialisationListProduits">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="initialisationListProduitsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="initialisationListProduitsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UPESellServiceService">
+
+      <wsdl:port binding="impl:UPESellServiceSoapBinding" name="UPESellService">
+
+         <wsdlsoap:address location="http://localhost:8040/UPESellService/services/UPESellService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,255 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UPESellServiceService WSDL service -->
+
+  <service name="UPESellService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://upesellservice.rmi.upem"/>
+      <parameter name="wsdlServiceElement" value="UPESellServiceService"/>
+      <parameter name="schemaQualified" value="http://upesellservice.rmi.upem,http://xml.apache.org/xml-soap"/>
+      <parameter name="wsdlServicePort" value="UPESellService"/>
+      <parameter name="className" value="upem.rmi.upesellservice.UPESellServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="UPESellService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="setProductsToSell" qname="operNS:setProductsToSell" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+        <parameter qname="pns:productsToSell" xmlns:pns="http://upesellservice.rmi.upem" type="tns:ArrayOf_xsd_anyType" xmlns:tns="http://upesellservice.rmi.upem" itemQName="itns:item" xmlns:itns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="affichePrixProduits" qname="operNS:affichePrixProduits" xmlns:operNS="http://upesellservice.rmi.upem" returnQName="retNS:affichePrixProduitsReturn" xmlns:retNS="http://upesellservice.rmi.upem" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:lp" xmlns:pns="http://upesellservice.rmi.upem" type="tns:ArrayOf_xsd_anyType" xmlns:tns="http://upesellservice.rmi.upem" itemQName="itns:item" xmlns:itns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="ajouterAuPanier" qname="operNS:ajouterAuPanier" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://upesellservice.rmi.upem" type="tns:Produit" xmlns:tns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="getProductsToSell" qname="operNS:getProductsToSell" xmlns:operNS="http://upesellservice.rmi.upem" returnQName="retNS:getProductsToSellReturn" xmlns:retNS="http://upesellservice.rmi.upem" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://upesellservice.rmi.upem" returnItemQName="tns:item" xmlns:tns="http://upesellservice.rmi.upem" soapAction="" >
+      </operation>
+      <operation name="setPanier" qname="operNS:setPanier" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+        <parameter qname="pns:panier" xmlns:pns="http://upesellservice.rmi.upem" type="tns:ArrayOf_xsd_anyType" xmlns:tns="http://upesellservice.rmi.upem" itemQName="itns:item" xmlns:itns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="plusDeDeuxMois" qname="operNS:plusDeDeuxMois" xmlns:operNS="http://upesellservice.rmi.upem" returnQName="retNS:plusDeDeuxMoisReturn" xmlns:retNS="http://upesellservice.rmi.upem" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://upesellservice.rmi.upem" type="tns:Produit" xmlns:tns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="getPanier" qname="operNS:getPanier" xmlns:operNS="http://upesellservice.rmi.upem" returnQName="retNS:getPanierReturn" xmlns:retNS="http://upesellservice.rmi.upem" returnType="rtns:ArrayOf_xsd_anyType" xmlns:rtns="http://upesellservice.rmi.upem" returnItemQName="tns:item" xmlns:tns="http://upesellservice.rmi.upem" soapAction="" >
+      </operation>
+      <operation name="viderPanier" qname="operNS:viderPanier" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+      </operation>
+      <operation name="modifierPanier" qname="operNS:modifierPanier" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://upesellservice.rmi.upem" type="tns:Produit" xmlns:tns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="estDisponible" qname="operNS:estDisponible" xmlns:operNS="http://upesellservice.rmi.upem" returnQName="retNS:estDisponibleReturn" xmlns:retNS="http://upesellservice.rmi.upem" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:p" xmlns:pns="http://upesellservice.rmi.upem" type="tns:Produit" xmlns:tns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <operation name="initialisationListProduits" qname="operNS:initialisationListProduits" xmlns:operNS="http://upesellservice.rmi.upem" soapAction="" >
+        <parameter qname="pns:produits" xmlns:pns="http://upesellservice.rmi.upem" type="tns:ArrayOf_xsd_anyType" xmlns:tns="http://upesellservice.rmi.upem" itemQName="itns:item" xmlns:itns="http://upesellservice.rmi.upem"/>
+      </operation>
+      <parameter name="allowedMethods" value="modifierPanier setProductsToSell plusDeDeuxMois initialisationListProduits estDisponible viderPanier getProductsToSell setPanier affichePrixProduits ajouterAuPanier getPanier"/>
+
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>plusDeDeuxMoisResponse"
+        type="java:upem.rmi.upesellservice.PlusDeDeuxMoisResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>affichePrixProduitsResponse"
+        type="java:upem.rmi.upesellservice.AffichePrixProduitsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>setProductsToSellResponse"
+        type="java:upem.rmi.upesellservice.SetProductsToSellResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>getPanierResponse"
+        type="java:upem.rmi.upesellservice.GetPanierResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>initialisationListProduitsResponse"
+        type="java:upem.rmi.upesellservice.InitialisationListProduitsResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>getProductsToSell"
+        type="java:upem.rmi.upesellservice.GetProductsToSell"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <arrayMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>getProductsToSellResponse"
+        type="java:upem.rmi.upesellservice.GetProductsToSellResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>setPanier"
+        type="java:upem.rmi.upesellservice.SetPanier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>modifierPanierResponse"
+        type="java:upem.rmi.upesellservice.ModifierPanierResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>getPanier"
+        type="java:upem.rmi.upesellservice.GetPanier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>modifierPanier"
+        type="java:upem.rmi.upesellservice.ModifierPanier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:Utilisateur"
+        type="java:upem.rmi.upesellservice.Utilisateur"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>estDisponibleResponse"
+        type="java:upem.rmi.upesellservice.EstDisponibleResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>viderPanierResponse"
+        type="java:upem.rmi.upesellservice.ViderPanierResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>initialisationListProduits"
+        type="java:upem.rmi.upesellservice.InitialisationListProduits"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>ajouterAuPanier"
+        type="java:upem.rmi.upesellservice.AjouterAuPanier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>setPanierResponse"
+        type="java:upem.rmi.upesellservice.SetPanierResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>affichePrixProduits"
+        type="java:upem.rmi.upesellservice.AffichePrixProduits"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>ajouterAuPanierResponse"
+        type="java:upem.rmi.upesellservice.AjouterAuPanierResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:Produit"
+        type="java:upem.rmi.upesellservice.Produit"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>viderPanier"
+        type="java:upem.rmi.upesellservice.ViderPanier"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>estDisponible"
+        type="java:upem.rmi.upesellservice.EstDisponible"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>setProductsToSell"
+        type="java:upem.rmi.upesellservice.SetProductsToSell"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://upesellservice.rmi.upem"
+        qname="ns:>plusDeDeuxMois"
+        type="java:upem.rmi.upesellservice.PlusDeDeuxMois"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
