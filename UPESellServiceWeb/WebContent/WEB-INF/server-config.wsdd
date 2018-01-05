@@ -1,0 +1,81 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="/Users/sila/Workspace-RMI/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/UPESellServiceWeb/WEB-INF/attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="Partage" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="getSize" qname="ns1:getSize" returnQName="ns1:getSizeReturn" returnType="xsd:int" soapAction="" xmlns:ns1="http://partage" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="getProductsToSell" qname="ns2:getProductsToSell" returnQName="ns2:getProductsToSellReturn" returnType="ns2:Produit" soapAction="" xmlns:ns2="http://partage"/>
+  <ns1:operation name="plusDeDeuxMois" qname="ns3:plusDeDeuxMois" returnQName="ns3:plusDeDeuxMoisReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://partage" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:p" type="ns3:Produit"/>
+  </ns1:operation>
+  <ns1:operation name="getProduitPanier" qname="ns4:getProduitPanier" returnQName="ns4:getProduitPanierReturn" returnType="ns4:Produit" soapAction="" xmlns:ns4="http://partage">
+   <ns1:parameter qname="ns4:i" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="affichePrixProduit" qname="ns5:affichePrixProduit" returnQName="ns5:affichePrixProduitReturn" returnType="xsd:string" soapAction="" xmlns:ns5="http://partage" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns5:p" type="ns5:Produit"/>
+  </ns1:operation>
+  <ns1:operation name="ajouterAuPanier" qname="ns6:ajouterAuPanier" soapAction="" xmlns:ns6="http://partage">
+   <ns1:parameter qname="ns6:p" type="ns6:Produit"/>
+  </ns1:operation>
+  <ns1:operation name="viderPanier" qname="ns7:viderPanier" soapAction="" xmlns:ns7="http://partage"/>
+  <ns1:parameter name="allowedMethods" value="getSize plusDeDeuxMois getProduitPanier viderPanier affichePrixProduit getProductsToSell ajouterAuPanier"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Partage"/>
+  <ns1:parameter name="className" value="partage.Partage"/>
+  <ns1:parameter name="wsdlServicePort" value="Partage"/>
+  <ns1:parameter name="schemaQualified" value="http://partage"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://partage"/>
+  <ns1:parameter name="wsdlServiceElement" value="PartageService"/>
+  <ns1:parameter name="scope" value="application"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns8:Produit" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:partage.Produit" xmlns:ns8="http://partage"/>
+  <ns1:arrayMapping innerType="xsd:int" languageSpecificType="java:int[]" qname="ns9:ArrayOf_xsd_int" xmlns:ns9="http://partage" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns10:ArrayOf_xsd_string" xmlns:ns10="http://partage" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

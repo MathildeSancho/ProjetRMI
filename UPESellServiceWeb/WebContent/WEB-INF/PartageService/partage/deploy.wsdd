@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PartageService WSDL service -->
+
+  <service name="Partage" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://partage"/>
+      <parameter name="wsdlServiceElement" value="PartageService"/>
+      <parameter name="schemaQualified" value="http://partage"/>
+      <parameter name="wsdlServicePort" value="Partage"/>
+      <parameter name="className" value="partage.Partage"/>
+      <parameter name="wsdlPortType" value="Partage"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://partage" xmlns:retNS="http://partage" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getSize" qname="operNS:getSize" returnQName="retNS:getSizeReturn" returnType="rtns:int" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://partage" xmlns:retNS="http://partage" xmlns:rtns="http://partage" name="getProductsToSell" qname="operNS:getProductsToSell" returnQName="retNS:getProductsToSellReturn" returnType="rtns:Produit" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://partage" xmlns:retNS="http://partage" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="plusDeDeuxMois" qname="operNS:plusDeDeuxMois" returnQName="retNS:plusDeDeuxMoisReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://partage" xmlns:tns="http://partage" qname="pns:p" type="tns:Produit"/>
+      </operation>
+      <operation xmlns:operNS="http://partage" xmlns:retNS="http://partage" xmlns:rtns="http://partage" name="getProduitPanier" qname="operNS:getProduitPanier" returnQName="retNS:getProduitPanierReturn" returnType="rtns:Produit" soapAction="">
+        <parameter xmlns:pns="http://partage" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:i" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://partage" xmlns:retNS="http://partage" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="affichePrixProduit" qname="operNS:affichePrixProduit" returnQName="retNS:affichePrixProduitReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://partage" xmlns:tns="http://partage" qname="pns:p" type="tns:Produit"/>
+      </operation>
+      <operation xmlns:operNS="http://partage" name="ajouterAuPanier" qname="operNS:ajouterAuPanier" soapAction="">
+        <parameter xmlns:pns="http://partage" xmlns:tns="http://partage" qname="pns:p" type="tns:Produit"/>
+      </operation>
+      <operation xmlns:operNS="http://partage" name="viderPanier" qname="operNS:viderPanier" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="getSize plusDeDeuxMois getProduitPanier viderPanier affichePrixProduit getProductsToSell ajouterAuPanier"/>
+
+      <typeMapping xmlns:ns="http://partage" qname="ns:Produit" type="java:partage.Produit" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://partage" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_int" type="java:int[]" innerType="cmp-ns:int" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://partage" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle=""/>
+  </service>
+</deployment>
